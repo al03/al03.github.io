@@ -1,0 +1,794 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Xcode,Homebrew,iTerm,Zsh,Oh My Zsh,Ruby,Python,Git," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这篇文章简单说下如何在一台新的Mac上设置开发环境(主流语言都适用)，不少同学在用Mac开发的时候，对于Mac开发环境的设置还是不太了解。 有人说了，不就是装个IDE发布个程序吗？有什么环境可以配置的。😓 在日常的开发中，能够有一套良好稳定的开发环境配置，对于开发速度、管理等有很大的帮助。我还会讲下Node.js、Ruby、Python的基本环境配置。 Xcode对于iOS、Mac开发者来说Xc">
+<meta name="keywords" content="Xcode,Homebrew,iTerm,Zsh,Oh My Zsh,Ruby,Python,Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac 开发环境设置">
+<meta property="og:url" content="al03.github.io/Mac开发设置/index.html">
+<meta property="og:site_name" content="Al03&#39;s blog">
+<meta property="og:description" content="这篇文章简单说下如何在一台新的Mac上设置开发环境(主流语言都适用)，不少同学在用Mac开发的时候，对于Mac开发环境的设置还是不太了解。 有人说了，不就是装个IDE发布个程序吗？有什么环境可以配置的。😓 在日常的开发中，能够有一套良好稳定的开发环境配置，对于开发速度、管理等有很大的帮助。我还会讲下Node.js、Ruby、Python的基本环境配置。 Xcode对于iOS、Mac开发者来说Xc">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="/images/Screen%20Shot%202016-09-01%20at%202.10.35%20PM.png">
+<meta property="og:updated_time" content="2017-07-26T03:38:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac 开发环境设置">
+<meta name="twitter:description" content="这篇文章简单说下如何在一台新的Mac上设置开发环境(主流语言都适用)，不少同学在用Mac开发的时候，对于Mac开发环境的设置还是不太了解。 有人说了，不就是装个IDE发布个程序吗？有什么环境可以配置的。😓 在日常的开发中，能够有一套良好稳定的开发环境配置，对于开发速度、管理等有很大的帮助。我还会讲下Node.js、Ruby、Python的基本环境配置。 Xcode对于iOS、Mac开发者来说Xc">
+<meta name="twitter:image" content="/images/Screen%20Shot%202016-09-01%20at%202.10.35%20PM.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="al03.github.io/Mac开发设置/"/>
+
+
+
+
+
+  <title> Mac 开发环境设置 | Al03's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-88259532-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Al03's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="al03.github.io/Mac开发设置/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Al03">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Al03's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Al03's blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Mac 开发环境设置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-01T01:58:44+08:00">
+                2016-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mac/" itemprop="url" rel="index">
+                    <span itemprop="name">Mac</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mac/Tools/" itemprop="url" rel="index">
+                    <span itemprop="name">Tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇文章简单说下如何在一台新的Mac上设置开发环境(主流语言都适用)，不少同学在用Mac开发的时候，对于Mac开发环境的设置还是不太了解。
+有人说了，不就是装个IDE发布个程序吗？有什么环境可以配置的。😓</p>
+<p>在日常的开发中，能够有一套良好稳定的开发环境配置，对于开发速度、管理等有很大的帮助。我还会讲下<code>Node.js</code>、<code>Ruby</code>、<code>Python</code>的基本环境配置。</p>
+<h1 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h1><p>对于iOS、Mac开发者来说<code>Xcode</code>是一定要安装的。但同时<code>Xcode</code>也支持<code>C</code>, <code>C++</code>, <code>Java</code>, <code>Python</code>, <code>Ruby</code>, <code>ResEdit</code>等。</p>
+<p>要去<code>App Store</code>下载，避免<a href="https://zh.wikipedia.org/wiki/XcodeGhost%E9%A3%8E%E6%B3%A2" target="_blank" rel="external">Xcode Ghost</a>。</p>
+<p>安装 Xcode command line tools</p>
+<pre><code>$ xcode-select --install
+</code></pre><h1 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h1><p>包管理器使安装、升级、管理程序或库变得很简单。<code>Homebrew</code>是OS X上最受欢迎的包管理器，和<code>Linux</code>上的<code>apt</code>, <code>yum</code>等一样。</p>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>Homebrew依赖Xcode的Command Line Tools，安装前要先安装<code>Xcode</code>的Command Line Tools。</p>
+<p>通过OS X上的终端安装，在终端粘贴下面的命令（不包含$）：</p>
+<pre><code>$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>安装包（Homebrew称为Formula）只需在终端输入：</p>
+<pre><code>$ brew install &lt;formula&gt;
+</code></pre><p>更新</p>
+<pre><code>$ brew update
+</code></pre><p>更新已安装包</p>
+<pre><code>$ brew upgrade
+</code></pre><p>或指定更新</p>
+<pre><code>$ brew upgrade    &lt;formula&gt;
+</code></pre><p>清理旧的包</p>
+<pre><code>$ brew cleanup
+</code></pre><h2 id="Cask"><a href="#Cask" class="headerlink" title="Cask"></a>Cask</h2><p>除了安装各种包和非<code>GUI</code>的程序之外，Homebrew还可以安装<code>GUI</code>的Mac程序，例如Chrome等。</p>
+<pre><code>$ brew cask install google-chrome
+</code></pre><p>去<a href="https://caskroom.github.io/search" target="_blank" rel="external">caskroom.github.io</a>搜索看看有哪些app</p>
+<h1 id="iTerm2"><a href="#iTerm2" class="headerlink" title="iTerm2"></a>iTerm2</h1><p>在用了几次命令行后，让我们安装的跟好的<a href="http://www.iterm2.com/" target="_blank" rel="external">iTerm2</a>来替代系统的吧。</p>
+<h1 id="Zsh"><a href="#Zsh" class="headerlink" title="Zsh"></a>Zsh</h1><p>OS X默认的<code>Shell</code>为<code>Bash</code>，切版本较低。我们将使用<code>zsh</code>。</p>
+<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><pre><code>$ brew install zsh zsh-completions
+</code></pre><h2 id="Oh-My-Zsh"><a href="#Oh-My-Zsh" class="headerlink" title="Oh My Zsh"></a>Oh My Zsh</h2><p>Oh My Zsh是用来管理<code>zsh</code>配置的框架</p>
+<pre><code>$ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+</code></pre><p>如何配置，会在下篇文章里讲。</p>
+<p>目前我的配置效果是这样的</p>
+<p><img src="/images/Screen Shot 2016-09-01 at 2.10.35 PM.png" alt=""></p>
+<p>直接可以看到Git的branch和同步信息等，<code>⬆️ 1</code>表示有一个commit没有提交到repository。</p>
+<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><p>安装</p>
+<pre><code>$ brew install git
+</code></pre><p>设置Git用户信息</p>
+<pre><code>$ git config --global user.name &quot;Your Name Here&quot;
+$ git config --global user.email &quot;your_email@youremail.com&quot;
+</code></pre><p>这些信息会加在$HOME目录下的.gitconfig内。</p>
+<h2 id="SSH-Config-for-Git"><a href="#SSH-Config-for-Git" class="headerlink" title="SSH Config for Git"></a>SSH Config for Git</h2><p>如何配置<a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank" rel="external">Git的SSH key</a></p>
+<h2 id="Ignore"><a href="#Ignore" class="headerlink" title="Ignore"></a>Ignore</h2><p>创建~/.gitignore，在里面加入</p>
+<pre><code>.DS_Store
+</code></pre><p>OS X里.DS_Store是用来保存文件夹下文件排布的文件。</p>
+<p>跟多其他环境和语言的<code>.gitignore</code>的设置可以去<a href="https://github.com/github/gitignore" target="_blank" rel="external">这里</a>看看。</p>
+<h1 id="Ruby"><a href="#Ruby" class="headerlink" title="Ruby"></a>Ruby</h1><p>OS X默认安装了Ruby 2.0.0，但是为了不搞乱系统的Ruby环境所以我们要建立自己的Ruby环境。</p>
+<h2 id="安装rbenv"><a href="#安装rbenv" class="headerlink" title="安装rbenv"></a>安装rbenv</h2><p><code>rbenv</code>是Ruby的版本管理工具</p>
+<pre><code>$ brew install rbenv ruby-build rbenv-default-gems
+$ echo &apos;eval &quot;$(rbenv init -)&quot;&apos; &gt;&gt; ~/zshrc
+$ source ~/.zshrc
+</code></pre><h2 id="安装Ruby"><a href="#安装Ruby" class="headerlink" title="安装Ruby"></a>安装Ruby</h2><p>安装Ruby 2.3.1版本，并设置全局环境为2.3.1</p>
+<pre><code>$ rbenv install 2.3.1
+$ rbenv global 2.3.1
+</code></pre><h2 id="修改Gem-source"><a href="#修改Gem-source" class="headerlink" title="修改Gem source"></a>修改Gem source</h2><p><code>Gem</code>是Ruby的包管理器，但由于Gem的源是托管在S3上的，所以需要将<code>Gem</code>的源修改为淘宝的镜像</p>
+<pre><code>$ gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
+$ gem sources -l
+</code></pre><p><a href="https://ruby.taobao.org/" target="_blank" rel="external">详见</a></p>
+<h1 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>可以使用Homebrew安装，也可以使用nvm安装Node.js</p>
+<pre><code>$ brew update
+$ brew install node
+</code></pre><h2 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h2><p><code>npm</code>为Node.js的包管理器，使用方法如下：</p>
+<pre><code>$ npm install -g grunt-cli
+</code></pre><p>-g表示在全局环境下安装</p>
+<h2 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h2><p>安装nvm</p>
+<pre><code>$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.6/install.sh | bash## nvm
+</code></pre><p>设置环境，将以下内容添加到~/.zshrc</p>
+<pre><code>export NVM_DIR=&quot;$HOME/.nvm&quot;
+[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm
+</code></pre><p>应用更改</p>
+<pre><code>source ~/.zshrc
+</code></pre><p>安装Node.js</p>
+<pre><code>$ nvm install stable
+</code></pre><h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><p>OS X默认安装了<code>Python</code>，但我们还是要建立自己的<code>Python</code>环境。</p>
+<p>安装</p>
+<pre><code>$ brew install python
+</code></pre><h2 id="pip"><a href="#pip" class="headerlink" title="pip"></a>pip</h2><p><code>pip</code>是<code>Python</code>的包管理工具，系统也默认安装(还有它依赖的<code>setuptools</code>)，我们只需升级下它们</p>
+<pre><code>$ pip install --upgrade setuptools
+$ pip install --upgrade pip
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Xcode/" rel="tag"># Xcode</a>
+          
+            <a href="/tags/Homebrew/" rel="tag"># Homebrew</a>
+          
+            <a href="/tags/iTerm/" rel="tag"># iTerm</a>
+          
+            <a href="/tags/Zsh/" rel="tag"># Zsh</a>
+          
+            <a href="/tags/Oh-My-Zsh/" rel="tag"># Oh My Zsh</a>
+          
+            <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/xcode-in-vim/" rel="next" title="Xcode in Vim">
+                <i class="fa fa-chevron-left"></i> Xcode in Vim
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/API接口调试/" rel="prev" title="API对接调试">
+                API对接调试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Al03" />
+          <p class="site-author-name" itemprop="name">Al03</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/al03" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/maokaiyin" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xcode"><span class="nav-number">1.</span> <span class="nav-text">Xcode</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Homebrew"><span class="nav-number">2.</span> <span class="nav-text">Homebrew</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install"><span class="nav-number">2.1.</span> <span class="nav-text">Install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cask"><span class="nav-number">2.3.</span> <span class="nav-text">Cask</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iTerm2"><span class="nav-number">3.</span> <span class="nav-text">iTerm2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Zsh"><span class="nav-number">4.</span> <span class="nav-text">Zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#install"><span class="nav-number">4.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oh-My-Zsh"><span class="nav-number">4.2.</span> <span class="nav-text">Oh My Zsh</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git"><span class="nav-number">5.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-Config-for-Git"><span class="nav-number">5.1.</span> <span class="nav-text">SSH Config for Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ignore"><span class="nav-number">5.2.</span> <span class="nav-text">Ignore</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ruby"><span class="nav-number">6.</span> <span class="nav-text">Ruby</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装rbenv"><span class="nav-number">6.1.</span> <span class="nav-text">安装rbenv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Ruby"><span class="nav-number">6.2.</span> <span class="nav-text">安装Ruby</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改Gem-source"><span class="nav-number">6.3.</span> <span class="nav-text">修改Gem source</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Node-js"><span class="nav-number">7.</span> <span class="nav-text">Node.js</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">7.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm"><span class="nav-number">7.2.</span> <span class="nav-text">npm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nvm"><span class="nav-number">7.3.</span> <span class="nav-text">nvm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">8.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pip"><span class="nav-number">8.1.</span> <span class="nav-text">pip</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Al03</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

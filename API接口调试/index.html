@@ -1,0 +1,751 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Unit Test,HTTPie,Node.js,REST API,iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在使用网络API时，总会遇到不少问题，觉得自己的参数没有传错，可就是得不到正确的响应。问题可能出现在自己，也有可能出现在API。花费很多精力找出问题后，是自己的问题，自己fix掉，是API的问题，还被API设计者要求提供请求参数等，配合重现问题。  这里总结下我在使用网络API对接时的一些思想和工具。 利用好Unit Test使用好单元测试，在定义好一个网络请求接口后，我会先使用Unit Test">
+<meta name="keywords" content="Unit Test,HTTPie,Node.js,REST API,iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="API对接调试">
+<meta property="og:url" content="al03.github.io/API接口调试/index.html">
+<meta property="og:site_name" content="Al03&#39;s blog">
+<meta property="og:description" content="在使用网络API时，总会遇到不少问题，觉得自己的参数没有传错，可就是得不到正确的响应。问题可能出现在自己，也有可能出现在API。花费很多精力找出问题后，是自己的问题，自己fix掉，是API的问题，还被API设计者要求提供请求参数等，配合重现问题。  这里总结下我在使用网络API对接时的一些思想和工具。 利用好Unit Test使用好单元测试，在定义好一个网络请求接口后，我会先使用Unit Test">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="/images/73086565.png">
+<meta property="og:updated_time" content="2017-07-26T03:38:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="API对接调试">
+<meta name="twitter:description" content="在使用网络API时，总会遇到不少问题，觉得自己的参数没有传错，可就是得不到正确的响应。问题可能出现在自己，也有可能出现在API。花费很多精力找出问题后，是自己的问题，自己fix掉，是API的问题，还被API设计者要求提供请求参数等，配合重现问题。  这里总结下我在使用网络API对接时的一些思想和工具。 利用好Unit Test使用好单元测试，在定义好一个网络请求接口后，我会先使用Unit Test">
+<meta name="twitter:image" content="/images/73086565.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="al03.github.io/API接口调试/"/>
+
+
+
+
+
+  <title> API对接调试 | Al03's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-88259532-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Al03's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="al03.github.io/API接口调试/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Al03">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Al03's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Al03's blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                API对接调试
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-21T06:18:44+08:00">
+                2016-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mobile/" itemprop="url" rel="index">
+                    <span itemprop="name">Mobile</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mobile/Tools/" itemprop="url" rel="index">
+                    <span itemprop="name">Tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在使用网络API时，总会遇到不少问题，觉得自己的参数没有传错，可就是得不到正确的响应。问题可能出现在自己，也有可能出现在API。花费很多精力找出问题后，是自己的问题，自己fix掉，是API的问题，还被API设计者要求提供请求参数等，配合重现问题。</p>
+<p><img src="/images/73086565.png" alt="">
+这里总结下我在使用网络API对接时的一些思想和工具。</p>
+<h2 id="利用好Unit-Test"><a href="#利用好Unit-Test" class="headerlink" title="利用好Unit Test"></a>利用好Unit Test</h2><p>使用好单元测试，在定义好一个网络请求接口后，我会先使用<code>Unit Test</code>单独测试一下，这样就无需让app跳转到具体的页面，点击具体的按钮去触发要调试的网络请求，多次调试就会需要重复的跳转操作。而<code>Unit Test</code>一键解决了这个痛苦。</p>
+<h2 id="更好的验证和查找问题"><a href="#更好的验证和查找问题" class="headerlink" title="更好的验证和查找问题"></a>更好的验证和查找问题</h2><p>在调试某个API时，如果实在找不出问题所在，觉得请求参数没有出错，那么如何验证我们的请求呢？请API设计者协助？NO！这样又会影响到别人的工作，成本太大。既然只是验证请求，那自己搭个HTTPSever打印下请求不就OK了吗。</p>
+<p><a href="https://gist.github.com/huyng/814831" target="_blank" rel="external">reflect.py</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> BaseHTTPServer <span class="keyword">import</span> HTTPServer, BaseHTTPRequestHandler</div><div class="line"><span class="keyword">from</span> optparse <span class="keyword">import</span> OptionParser</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RequestHandler</span><span class="params">(BaseHTTPRequestHandler)</span>:</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_GET</span><span class="params">(self)</span>:</span></div><div class="line">        </div><div class="line">        request_path = self.path</div><div class="line">        </div><div class="line">        print(<span class="string">"\n----- Request Start -----&gt;\n"</span>)</div><div class="line">        print(request_path)</div><div class="line">        print(self.headers)</div><div class="line">        print(<span class="string">"&lt;----- Request End -----\n"</span>)</div><div class="line">        </div><div class="line">        self.send_response(<span class="number">200</span>)</div><div class="line">        self.send_header(<span class="string">"Set-Cookie"</span>, <span class="string">"foo=bar"</span>)</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_POST</span><span class="params">(self)</span>:</span></div><div class="line">        </div><div class="line">        request_path = self.path</div><div class="line">        </div><div class="line">        print(<span class="string">"\n----- Request Start -----&gt;\n"</span>)</div><div class="line">        print(request_path)</div><div class="line">        </div><div class="line">        request_headers = self.headers</div><div class="line">        content_length = request_headers.getheaders(<span class="string">'content-length'</span>)</div><div class="line">        length = int(content_length[<span class="number">0</span>]) <span class="keyword">if</span> content_length <span class="keyword">else</span> <span class="number">0</span></div><div class="line">        </div><div class="line">        print(request_headers)</div><div class="line">        print(self.rfile.read(length))</div><div class="line">        print(<span class="string">"&lt;----- Request End -----\n"</span>)</div><div class="line">        </div><div class="line">        self.send_response(<span class="number">200</span>)</div><div class="line">    </div><div class="line">    do_PUT = do_POST</div><div class="line">    do_DELETE = do_GET</div><div class="line">        </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    port = <span class="number">8080</span></div><div class="line">    print(<span class="string">'Listening on localhost:%s'</span> % port)</div><div class="line">    server = HTTPServer((<span class="string">''</span>, port), RequestHandler)</div><div class="line">    server.serve_forever()</div><div class="line"></div><div class="line">        </div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    parser = OptionParser()</div><div class="line">    parser.usage = (<span class="string">"Creates an http-server that will echo out any GET or POST parameters\n"</span></div><div class="line">                    <span class="string">"Run:\n\n"</span></div><div class="line">                    <span class="string">"   reflect"</span>)</div><div class="line">    (options, args) = parser.parse_args()</div><div class="line">    </div><div class="line">    main()</div></pre></td></tr></table></figure>
+<p>启动</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="keyword">python</span> reflect.<span class="keyword">py</span></div><div class="line">Listening <span class="keyword">on</span> localhos<span class="variable">t:8080</span></div></pre></td></tr></table></figure>
+<p>请求<code>localhost:8080/user?id=123</code></p>
+<p>打印</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">----- Request Start -----&gt;</div><div class="line"></div><div class="line">/user?id=<span class="number">123</span></div><div class="line">Host: localhost:<span class="number">8080</span></div><div class="line">User-Agent: HTTPie/<span class="number">0</span>.<span class="number">9</span>.<span class="number">6</span></div><div class="line">Accept: */*</div><div class="line">Accept-Encoding: gzip, deflate</div><div class="line">Connection: keep-alive</div><div class="line"></div><div class="line">&lt;----- Request End -----</div><div class="line"></div><div class="line"><span class="number">127.0.0.1</span> - - <span class="string">[21/Oct/2016 13:29:52]</span> <span class="string">"<span class="keyword">GET</span> /user?id=123 HTTP/1.1"</span> <span class="number">200</span> -</div></pre></td></tr></table></figure>
+<p>好，到这一步已经基本确认问题所在了，如果问题是自己的，自己去fix，不是的，向API设计者反馈。</p>
+<p>如何将出问题的请求打包给API设计者？</p>
+<p><code>cURL</code>？可是<code>cURL</code>好难用，尤其涉及到<code>HEAD</code>信息时。</p>
+<p>推荐工具<a href="https://github.com/jkbrzt/httpie" target="_blank" rel="external">HTTPie</a>，对比<code>cURL</code>，<code>HTTPie</code>使用起来更加方便，响应结果也更加Human readable。</p>
+<p>安装</p>
+<pre><code>$ brew install httpie
+</code></pre><p>使用</p>
+<pre><code>$ http --form POST api.example.org/person/1 name=&apos;John Smith&apos; User-Agent:Bacon/1.0
+</code></pre><p>请求方式 ：POST </p>
+<p>参数： name=&#39;John Smith&#39; </p>
+<p>HEAD：User-Agent:Bacon/1.0</p>
+<p>具体的使用说明去看官方说明</p>
+<h2 id="更快的开发效率"><a href="#更快的开发效率" class="headerlink" title="更快的开发效率"></a>更快的开发效率</h2><p>API使用者一定要等API设计完成才去对接吗？NO。自己搭建个<code>server</code>吧。</p>
+<p><a href="https://github.com/typicode/json-server" target="_blank" rel="external">json-server</a>是一个很好的搭建REST API的工具。这是个<code>Node.js</code>包，安装使用<code>npm</code>。</p>
+<pre><code>$ npm install json-server -g
+</code></pre><p>只需定义好数据模型，数据模型定义为JSON格式。</p>
+<p>例子 db.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"posts"</span>: [&#123; <span class="attr">"id"</span>: <span class="number">1</span>, <span class="attr">"title"</span>: <span class="string">"json-server"</span>, <span class="attr">"author"</span>: <span class="string">"typicode"</span> &#125;,&#123; <span class="attr">"id"</span>: <span class="number">2</span>, <span class="attr">"title"</span>: <span class="string">"json-server"</span>, <span class="attr">"author"</span>: <span class="string">"typicode"</span> &#125;,&#123; <span class="attr">"id"</span>: <span class="number">4</span>, <span class="attr">"title"</span>: <span class="string">"json-server"</span>, <span class="attr">"author"</span>: <span class="string">"typicode"</span> &#125;],</div><div class="line">	<span class="attr">"comments"</span>: [ &#123; <span class="attr">"id"</span>: <span class="number">1</span>, <span class="attr">"body"</span>: <span class="string">"some comment"</span>, <span class="attr">"postId"</span>: <span class="number">1</span> &#125; ],</div><div class="line">	<span class="attr">"profile"</span>: &#123; <span class="attr">"name"</span>: <span class="string">"typicode"</span> &#125;,</div><div class="line">	<span class="attr">"user"</span>: &#123; <span class="attr">"car"</span>:&#123;<span class="attr">"type"</span>:<span class="string">"o"</span>&#125;, <span class="attr">"info"</span>:&#123;<span class="attr">"name"</span>:<span class="string">"albert"</span>&#125;, <span class="attr">"status"</span>:<span class="number">0</span>&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>启动服务</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$ json-server db<span class="selector-class">.json</span></div><div class="line"></div><div class="line">\&#123;^_^&#125;/ hi!</div><div class="line"></div><div class="line">Loading db<span class="selector-class">.json</span></div><div class="line">Done</div><div class="line"></div><div class="line">Resources</div><div class="line">http:<span class="comment">//localhost:3000/posts</span></div><div class="line">http:<span class="comment">//localhost:3000/comments</span></div><div class="line">http:<span class="comment">//localhost:3000/profile</span></div><div class="line">http:<span class="comment">//localhost:3000/user</span></div><div class="line"></div><div class="line">Home</div><div class="line">http:<span class="comment">//localhost:3000</span></div><div class="line"></div><div class="line">Type s + enter at any <span class="selector-tag">time</span> to create <span class="selector-tag">a</span> snapshot of the database</div></pre></td></tr></table></figure>
+<p>产生了4个路径的API</p>
+<p>试着访问</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">$http http://localhost:3000/posts</div><div class="line">HTTP/1.1 200 OK</div><div class="line">Access-Control-Allow-Credentials: true</div><div class="line"><span class="keyword">Cache</span>-Control: <span class="keyword">no</span>-<span class="keyword">cache</span></div><div class="line"><span class="keyword">Connection</span>: <span class="keyword">keep</span>-alive</div><div class="line"><span class="keyword">Content</span>-<span class="keyword">Length</span>: <span class="number">77</span></div><div class="line"><span class="keyword">Content</span>-<span class="keyword">Type</span>: application/<span class="keyword">json</span>; charset=utf-8</div><div class="line">Date: Fri, 21 Oct 2016 02:37:36 GMT</div><div class="line">ETag: W/"4d-UcPUu5h974QTqEeR2UT3BA"</div><div class="line">Expires: -1</div><div class="line"><span class="keyword">Pragma</span>: <span class="keyword">no</span>-<span class="keyword">cache</span></div><div class="line">Vary: Origin, <span class="keyword">Accept</span>-<span class="keyword">Encoding</span></div><div class="line">X-<span class="keyword">Content</span>-<span class="keyword">Type</span>-Options: nosniff</div><div class="line">X-Powered-<span class="keyword">By</span>: Express</div><div class="line"></div><div class="line">[</div><div class="line">    &#123;</div><div class="line">        <span class="string">"author"</span>: <span class="string">"typicode"</span>,</div><div class="line">        <span class="string">"id"</span>: <span class="number">1</span>,</div><div class="line">        <span class="string">"title"</span>: <span class="string">"json-server"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        <span class="string">"author"</span>: <span class="string">"typicode"</span>,</div><div class="line">        <span class="string">"id"</span>: <span class="number">2</span>,</div><div class="line">        <span class="string">"title"</span>: <span class="string">"json-server"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        <span class="string">"author"</span>: <span class="string">"typicode"</span>,</div><div class="line">        <span class="string">"id"</span>: <span class="number">4</span>,</div><div class="line">        <span class="string">"title"</span>: <span class="string">"json-server"</span></div><div class="line">    &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>既然是<code>REST API</code>，<code>http://localhost:3000/posts</code>是请求<code>post</code>列表</p>
+<p>获取<code>id</code>为4的<code>post</code></p>
+<pre><code>http://localhost:3000/posts/4
+</code></pre><p>然后API使用者就先可以利用这个API进行自己的开发了。<strong>但前提是一定要和API设计者对数据定义达成一致</strong>。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>在日常的开发中还有不少问题需要重复地解决，这时候需要思考，我们遇到的问题并没有特殊性，同样的问题一定会出现在很多人身上，所以不要解决完某个具体问题就结束了，还要去试着找下解决这一类问题的解决方案或工具。而这些方案或工具会在你以后遇到类似的问题时给予很大的帮助。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unit-Test/" rel="tag"># Unit Test</a>
+          
+            <a href="/tags/HTTPie/" rel="tag"># HTTPie</a>
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+            <a href="/tags/REST-API/" rel="tag"># REST API</a>
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Mac开发设置/" rel="next" title="Mac 开发环境设置">
+                <i class="fa fa-chevron-left"></i> Mac 开发环境设置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/我是怎么使用tmux-的/" rel="prev" title="我是怎么使用tmux 的">
+                我是怎么使用tmux 的 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Al03" />
+          <p class="site-author-name" itemprop="name">Al03</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/al03" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/maokaiyin" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#利用好Unit-Test"><span class="nav-number">1.</span> <span class="nav-text">利用好Unit Test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更好的验证和查找问题"><span class="nav-number">2.</span> <span class="nav-text">更好的验证和查找问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更快的开发效率"><span class="nav-number">3.</span> <span class="nav-text">更快的开发效率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">4.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Al03</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
