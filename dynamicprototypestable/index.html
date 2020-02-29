@@ -6,15 +6,15 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -29,7 +29,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -63,21 +63,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="iOS," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="iOS,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
 
 
 
@@ -92,17 +92,10 @@
 <meta property="og:site_name" content="Al03&#39;s blog">
 <meta property="og:description" content="使用视图文件自定义较复杂的UITableViewCell，之前的做法是先做一个UITableViewCell的子类，然后再做一个以uitableviewcell为view的viewcontroller。后有了storyboard，在里面UITableView的content有两个属性Dynamic Prototypes和static cells，至于这两个的区别，Dynamic Prototype">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="/images/DynamicPrototypesTable/Screen%20Shot%202014-02-10%20at%2011.29.51%20AM.png">
-<meta property="og:image" content="/images/DynamicPrototypesTable/Screen%20Shot%202014-02-12%20at%205.26.38%20PM.png">
-<meta property="og:image" content="/images/DynamicPrototypesTable/Screen%20Shot%202014-02-10%20at%2011.42.23%20AM.png">
-<meta property="og:image" content="/images/DynamicPrototypesTable/iOS%20Simulator%20Screen%20shot%20Feb%2012,%202014,%205.33.17%20PM.png">
-<meta property="og:image" content="/images/DynamicPrototypesTable/Screen%20Shot%202014-02-10%20at%2011.42.05%20AM.png">
-<meta property="og:image" content="/images/DynamicPrototypesTable/iOS%20Simulator%20Screen%20shot%20Feb%2012,%202014,%205.46.26%20PM.png">
 <meta property="og:updated_time" content="2017-07-26T03:38:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DynamicPrototypesTable">
 <meta name="twitter:description" content="使用视图文件自定义较复杂的UITableViewCell，之前的做法是先做一个UITableViewCell的子类，然后再做一个以uitableviewcell为view的viewcontroller。后有了storyboard，在里面UITableView的content有两个属性Dynamic Prototypes和static cells，至于这两个的区别，Dynamic Prototype">
-<meta name="twitter:image" content="/images/DynamicPrototypesTable/Screen%20Shot%202014-02-10%20at%2011.29.51%20AM.png">
 
 
 
@@ -130,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="al03.github.io/dynamicprototypestable/"/>
+  <link rel="canonical" href="al03.github.io/dynamicprototypestable/">
 
 
 
@@ -174,7 +167,7 @@
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Al03's blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -201,7 +194,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -211,7 +204,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -221,7 +214,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -231,7 +224,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -241,7 +234,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -280,14 +273,14 @@
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Al03">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content>
     <meta itemprop="image" content="/images/avatar.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="Al03's blog">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Al03's blog" src="">
+      <img style="display:none;" itemprop="url image" alt="Al03's blog" src>
     </span>
   </span>
 
@@ -324,7 +317,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -367,11 +360,11 @@
       
 
       
-        <p>使用视图文件自定义较复杂的<code>UITableViewCell</code>，之前的做法是先做一个<code>UITableViewCell</code>的子类，然后再做一个以<code>uitableviewcell</code>为<code>view</code>的<code>viewcontroller</code>。后有了<code>storyboard</code>，在里面<code>UITableView</code>的<code>content</code>有两个属性<code>Dynamic Prototypes</code>和<code>static cells</code>，至于这两个的<a href="http://stackoverflow.com/questions/10965214/confusion-about-static-cells-vs-dynamic-cells" target="_blank" rel="external">区别</a>，<code>Dynamic Prototypes</code>属性支持重用，<code>static cells</code>就不介绍了，它连<code>UITableViewDataSource</code>的方法都不用。</p>
-<h5 id="设置UITabelView"><a href="#设置UITabelView" class="headerlink" title="设置UITabelView"></a>设置UITabelView</h5><p><img src="/images/DynamicPrototypesTable/Screen Shot 2014-02-10 at 11.29.51 AM.png" alt="image"></p>
-<h5 id="向UITabelView添加cell和cell的内容"><a href="#向UITabelView添加cell和cell的内容" class="headerlink" title="向UITabelView添加cell和cell的内容"></a>向UITabelView添加cell和cell的内容</h5><p><img src="/images/DynamicPrototypesTable/Screen Shot 2014-02-12 at 5.26.38 PM.png" alt="image"></p>
+        <p>使用视图文件自定义较复杂的<code>UITableViewCell</code>，之前的做法是先做一个<code>UITableViewCell</code>的子类，然后再做一个以<code>uitableviewcell</code>为<code>view</code>的<code>viewcontroller</code>。后有了<code>storyboard</code>，在里面<code>UITableView</code>的<code>content</code>有两个属性<code>Dynamic Prototypes</code>和<code>static cells</code>，至于这两个的<a href="http://stackoverflow.com/questions/10965214/confusion-about-static-cells-vs-dynamic-cells" target="_blank" rel="noopener">区别</a>，<code>Dynamic Prototypes</code>属性支持重用，<code>static cells</code>就不介绍了，它连<code>UITableViewDataSource</code>的方法都不用。</p>
+<h5 id="设置UITabelView"><a href="#设置UITabelView" class="headerlink" title="设置UITabelView"></a>设置UITabelView</h5><p>![image](/images/DynamicPrototypesTable/Screen Shot 2014-02-10 at 11.29.51 AM.png)</p>
+<h5 id="向UITabelView添加cell和cell的内容"><a href="#向UITabelView添加cell和cell的内容" class="headerlink" title="向UITabelView添加cell和cell的内容"></a>向UITabelView添加cell和cell的内容</h5><p>![image](/images/DynamicPrototypesTable/Screen Shot 2014-02-12 at 5.26.38 PM.png)</p>
 <p>这步很爽有木有。然后设置不同样式<code>cell</code>的<code>Identifier</code></p>
-<p><img src="/images/DynamicPrototypesTable/Screen Shot 2014-02-10 at 11.42.23 AM.png" alt="image"></p>
+<p>![image](/images/DynamicPrototypesTable/Screen Shot 2014-02-10 at 11.42.23 AM.png)</p>
 <h5 id="UITableViewDataSource"><a href="#UITableViewDataSource" class="headerlink" title="UITableViewDataSource"></a>UITableViewDataSource</h5><pre><code>-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -385,10 +378,9 @@ if (indexPath.row == 0) {
 }
 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:strCellId];
 return cell;
-}
-</code></pre><p><img src="/images/DynamicPrototypesTable/iOS Simulator Screen shot Feb 12, 2014, 5.33.17 PM.png" alt="image"></p>
+}</code></pre><p>![image](/images/DynamicPrototypesTable/iOS Simulator Screen shot Feb 12, 2014, 5.33.17 PM.png)</p>
 <h5 id="cell内的信息设置"><a href="#cell内的信息设置" class="headerlink" title="cell内的信息设置"></a>cell内的信息设置</h5><p>做一个<code>UITableViewCell</code>子类</p>
-<p><img src="/images/DynamicPrototypesTable/Screen Shot 2014-02-10 at 11.42.05 AM.png" alt="image"></p>
+<p>![image](/images/DynamicPrototypesTable/Screen Shot 2014-02-10 at 11.42.05 AM.png)</p>
 <h6 id="UITableViewDataSource-1"><a href="#UITableViewDataSource-1" class="headerlink" title="UITableViewDataSource"></a>UITableViewDataSource</h6><pre><code>-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -411,9 +403,8 @@ if ([strCellId isEqualToString:@&quot;cellSlider&quot;]) {
     cell.labelFlag.text = @&quot;switch&quot;;
 }
 return cell;
-}
-</code></pre><p><img src="/images/DynamicPrototypesTable/iOS Simulator Screen shot Feb 12, 2014, 5.46.26 PM.png" alt="image"></p>
-<p><a href="https://github.com/al03/DynamicPrototypesTable" target="_blank" rel="external">工程地址</a></p>
+}</code></pre><p>![image](/images/DynamicPrototypesTable/iOS Simulator Screen shot Feb 12, 2014, 5.46.26 PM.png)</p>
+<p><a href="https://github.com/al03/DynamicPrototypesTable" target="_blank" rel="noopener">工程地址</a></p>
 
       
     </div>
@@ -506,7 +497,7 @@ return cell;
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -517,16 +508,14 @@ return cell;
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="Al03" />
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Al03">
           <p class="site-author-name" itemprop="name">Al03</p>
           <p class="site-description motion-element" itemprop="description"></p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -616,10 +605,10 @@ return cell;
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -6,15 +6,15 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -29,7 +29,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -63,21 +63,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="tmux," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="tmux,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
 
 
 
@@ -92,12 +92,10 @@
 <meta property="og:site_name" content="Al03&#39;s blog">
 <meta property="og:description" content="当越来越多的工作是在终端内完成的时候，可以使用tab或split当前窗口实现多窗口之间的切换。即使这样切换起来还是不方便，而且无论是终端顶部的tab还是split后中间的那条线，都阻碍了屏幕的充分利用。 这时就需要terminal mutiplexer「终端复用器」来帮我管理窗口。 主流“终端复用”工具有tmux和screen等。 这里主要介绍tmux，它的detach和attach，以及每个wi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="/images/Screen%20Shot%202016-12-09%20at%207.01.27%20PM.png">
 <meta property="og:updated_time" content="2017-07-26T03:38:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我是怎么使用tmux 的">
 <meta name="twitter:description" content="当越来越多的工作是在终端内完成的时候，可以使用tab或split当前窗口实现多窗口之间的切换。即使这样切换起来还是不方便，而且无论是终端顶部的tab还是split后中间的那条线，都阻碍了屏幕的充分利用。 这时就需要terminal mutiplexer「终端复用器」来帮我管理窗口。 主流“终端复用”工具有tmux和screen等。 这里主要介绍tmux，它的detach和attach，以及每个wi">
-<meta name="twitter:image" content="/images/Screen%20Shot%202016-12-09%20at%207.01.27%20PM.png">
 
 
 
@@ -125,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="al03.github.io/我是怎么使用tmux-的/"/>
+  <link rel="canonical" href="al03.github.io/我是怎么使用tmux-的/">
 
 
 
@@ -169,7 +167,7 @@
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Al03's blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -196,7 +194,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -206,7 +204,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -216,7 +214,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -226,7 +224,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -236,7 +234,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -275,14 +273,14 @@
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Al03">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content>
     <meta itemprop="image" content="/images/avatar.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="Al03's blog">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Al03's blog" src="">
+      <img style="display:none;" itemprop="url image" alt="Al03's blog" src>
     </span>
   </span>
 
@@ -319,7 +317,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -364,30 +362,27 @@
       
         <p>当越来越多的工作是在终端内完成的时候，可以使用tab或split当前窗口实现多窗口之间的切换。即使这样切换起来还是不方便，而且无论是终端顶部的tab还是split后中间的那条线，都阻碍了屏幕的充分利用。</p>
 <p>这时就需要<code>terminal mutiplexer</code>「终端复用器」来帮我管理窗口。</p>
-<p>主流“终端复用”工具有<a href="https://tmux.github.io/" target="_blank" rel="external">tmux</a>和screen等。</p>
+<p>主流“终端复用”工具有<a href="https://tmux.github.io/" target="_blank" rel="noopener">tmux</a>和screen等。</p>
 <p>这里主要介绍tmux，它的<code>detach</code>和<code>attach</code>，以及每个window占用极少的内存，尤其是attach，多少次手不小心⌘+w关闭了终端，只需</p>
-<pre><code>tmux attach
-</code></pre><p>安装</p>
-<pre><code>brew install tmux
-</code></pre><p>运行</p>
-<pre><code>tmux
-</code></pre><p>tmux采用分段式快捷键，即要操作tmux，需要先触发一个快捷键，再输入操作按键。</p>
+<pre><code>tmux attach</code></pre><p>安装</p>
+<pre><code>brew install tmux</code></pre><p>运行</p>
+<pre><code>tmux</code></pre><p>tmux采用分段式快捷键，即要操作tmux，需要先触发一个快捷键，再输入操作按键。</p>
 <p>默认的<code>prefix</code>为<code>Control+b</code>，即先按<code>Control+b</code>然后在输入操作按键。</p>
 <h2 id="窗口关系结构"><a href="#窗口关系结构" class="headerlink" title="窗口关系结构"></a>窗口关系结构</h2><p>tmux的窗口结构如下</p>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">tmux</div><div class="line">├── sessio<span class="symbol">n1</span></div><div class="line">│   ├── wi<span class="symbol">ndow1</span></div><div class="line">│   │   ├── pa<span class="symbol">ne1</span></div><div class="line">│   │   └── pa<span class="symbol">ne2</span></div><div class="line">│   └── wi<span class="symbol">ndow2</span></div><div class="line">│       ├── pa<span class="symbol">ne1</span></div><div class="line">│       └── pa<span class="symbol">ne2</span></div><div class="line">└── sessio<span class="symbol">n2</span></div><div class="line">    ├── wi<span class="symbol">ndow1</span></div><div class="line">    │   ├── pa<span class="symbol">ne1</span></div><div class="line">    │   └── pa<span class="symbol">ne2</span></div><div class="line">    └── wi<span class="symbol">ndow2</span></div><div class="line">        ├── pa<span class="symbol">ne1</span></div><div class="line">        └── pa<span class="symbol">ne2</span></div></pre></td></tr></table></figure>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">tmux</span><br><span class="line">├── sessio<span class="symbol">n1</span></span><br><span class="line">│   ├── wi<span class="symbol">ndow1</span></span><br><span class="line">│   │   ├── pa<span class="symbol">ne1</span></span><br><span class="line">│   │   └── pa<span class="symbol">ne2</span></span><br><span class="line">│   └── wi<span class="symbol">ndow2</span></span><br><span class="line">│       ├── pa<span class="symbol">ne1</span></span><br><span class="line">│       └── pa<span class="symbol">ne2</span></span><br><span class="line">└── sessio<span class="symbol">n2</span></span><br><span class="line">    ├── wi<span class="symbol">ndow1</span></span><br><span class="line">    │   ├── pa<span class="symbol">ne1</span></span><br><span class="line">    │   └── pa<span class="symbol">ne2</span></span><br><span class="line">    └── wi<span class="symbol">ndow2</span></span><br><span class="line">        ├── pa<span class="symbol">ne1</span></span><br><span class="line">        └── pa<span class="symbol">ne2</span></span><br></pre></td></tr></table></figure>
+
 <p>通过上面的结构可以看出，tmux里的以<code>session</code>为单位，每个<code>session</code>内会有多个<code>window</code>，而每个<code>window</code>又可以被切分出做个<code>pane</code>。</p>
 <p>运行tmux后，tmux会初始化一个<code>session</code>，这个<code>session</code>里默认会又一个<code>window</code>，每个<code>window</code>下默认也会有一个pane。</p>
-<p>基本的操作不会在此一一列举，请自行搜索，或<a href="http://man.openbsd.org/OpenBSD-current/man1/tmux.1" target="_blank" rel="external">阅读文档</a>。</p>
+<p>基本的操作不会在此一一列举，请自行搜索，或<a href="http://man.openbsd.org/OpenBSD-current/man1/tmux.1" target="_blank" rel="noopener">阅读文档</a>。</p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>tmux和Vim一样可以灵活配置，只需编辑<code>$HOME</code>下的<code>.tmux.conf</code>即可。</p>
 <p>同样也和Vim一样，为什么要一步一步去配置tmux，将别人已经配置好的文件拿来用不就好了吗？</p>
 <p>Right！</p>
-<p><a href="https://github.com/tony/tmux-config" target="_blank" rel="external">这里</a></p>
+<p><a href="https://github.com/tony/tmux-config" target="_blank" rel="noopener">这里</a></p>
 <p>首先里面的配置是将prefix改为了C-a，因为Control+b和Vim里的回滚冲突。</p>
 <pre><code>#C-b is not acceptable -- Vim uses it
 unbind C-b
-set -g prefix C-a
-</code></pre><p>应用配置后bind-key+hjkl分别代表代表上下左右</p>
-<p><img src="/images/Screen Shot 2016-12-09 at 7.01.27 PM.png" alt="我的tmux"></p>
+set -g prefix C-a</code></pre><p>应用配置后bind-key+hjkl分别代表代表上下左右</p>
+<p>![我的tmux](/images/Screen Shot 2016-12-09 at 7.01.27 PM.png)</p>
 
       
     </div>
@@ -480,7 +475,7 @@ set -g prefix C-a
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -491,16 +486,14 @@ set -g prefix C-a
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
-               alt="Al03" />
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Al03">
           <p class="site-author-name" itemprop="name">Al03</p>
           <p class="site-description motion-element" itemprop="description"></p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -590,10 +583,10 @@ set -g prefix C-a
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
