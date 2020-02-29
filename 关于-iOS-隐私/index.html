@@ -92,7 +92,7 @@
 <meta property="og:description" content="如何在使用智能手机时最大程度保护自己的隐私，我在这里分享一下，因为我日常主要使用 iOS 设备，所以只能在该系统上说下经验。 iCloud由于 Apple 将中国大陆的 iCloud 的数据由云上贵州运营。 其中 “我们在我们认为合理必要或正当的情况下，可以访问、使用、保存您的帐户信息和内容以及/或者将您的帐户信息和内容披露给执法机构、政府官员和/或某一第三方而无需向您承担任何责任，但前提是，我们">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="al03.github.io/images/photo_exif.jpeg">
-<meta property="og:updated_time" content="2020-02-29T09:27:15.120Z">
+<meta property="og:updated_time" content="2020-02-29T09:36:27.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 iOS 隐私">
 <meta name="twitter:description" content="如何在使用智能手机时最大程度保护自己的隐私，我在这里分享一下，因为我日常主要使用 iOS 设备，所以只能在该系统上说下经验。 iCloud由于 Apple 将中国大陆的 iCloud 的数据由云上贵州运营。 其中 “我们在我们认为合理必要或正当的情况下，可以访问、使用、保存您的帐户信息和内容以及/或者将您的帐户信息和内容披露给执法机构、政府官员和/或某一第三方而无需向您承担任何责任，但前提是，我们">
@@ -351,8 +351,9 @@
 <h4 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h4><p>将 Apple ID 切换为其他地区，而关于 Apple ID 支付方式的问题，可以使用购买美区 iTunes 充值卡（email 形式）进行账户充值。</p>
 <h2 id="照片信息"><a href="#照片信息" class="headerlink" title="照片信息"></a>照片信息</h2><p>照片算是手机能隐私的重要部分，而且像一些修图 App、社交 App 都需要访问，首先照片文件里除了图像外，还有一下 EXIF metadata（元数据），主要记录一些拍照是的信息，GPS、设备信息、时间等，甚至拍摄照片时镜头的朝向。</p>
 <p><img src="../images/photo_exif.jpeg" alt></p>
-<p>如果不希望这些信息被一些 App 恶意收集，可以拒绝授予相册访问权限，使用一些去除 metadata 的 App，我使用的是 Metapho。每次需要将照片分享出去时，都会通过 Metapho 在“照片”里的 extension 分享移除了 EXIF metadata 的照片，通过 Air drop 或对应的 IM 软件的 Extension 发出去。</p>
-<p>例如，我手机就禁止了微信的照片访问权限，如需要分享通过微信发送照片。</p>
+<p>如果不希望这些信息被一些 App 恶意收集，可以拒绝授予相册访问权限，使用一些去除 metadata 的 App，我使用的是 Metapho。每次需要将照片分享出去时，都会通过 Metapho 在“照片”里的 extension 分享移除 照片的 EXIF metadata，通过 Air drop 或对应的 IM 软件的 Extension 发出去。</p>
+<p>例如，我手机就禁止了微信的照片访问权限，如需要分享通过微信发送照片，我都会找照片里选择要分享的照片，点击分享按钮，找到 Metapho，点击 Metapho 内的分享按钮，选择 Share without Metadata，再选择微信的 extension，选中要发送的聊天框将图片发出去。</p>
+<p>虽然路径很长，但是还是值得的。</p>
 <h2 id="关于权限"><a href="#关于权限" class="headerlink" title="关于权限"></a>关于权限</h2><p>限制手机权限对各个 App 的授予。</p>
 <p>例如定位，能给 While Using the App （使用应用期间）就不允许 Always（始终），如果认为 App 没有特定需要定位的业务，不授予定位权限，或者直接使用 iOS 13 新增的 Alow once。</p>
 <p>例如相机，相机无非就是拍照和扫码，而不少 App，在申请相机权限时，会同时申请麦克风和相册权限。而扫码功能，iOS 自带的相机就提供了扫码功能，当然如果二维码是必须使用对应 App ，那没办法，这个我只能是需要时授权，使用完再拒绝授权。</p>
